@@ -25,6 +25,7 @@ function group_invite_init() {
 		//notification	
 		ossn_add_hook('notification:view', 'groupinvite', 'groupinvite_notification');
 		ossn_add_hook('notification:add', 'groupinvite', 'groupinvite_notification_add_config');
+		ossn_add_hook('notification:participants', 'groupinvite', 'groupinvite_notification_participants');
 }
 /** 
  * Group invitation notification
@@ -70,5 +71,13 @@ function group_inivite_widget($hook, $type, $module, $params) {
 				$module[] = ossn_plugin_view("groupinvite/widget", $params);
 		}
 		return $module;
+}
+/**
+ * Do not send notification to others users 
+ *
+ * @return void
+ */
+function groupinvite_notification_participants(){
+		return false;	
 }
 ossn_register_callback('ossn', 'init', 'group_invite_init');
