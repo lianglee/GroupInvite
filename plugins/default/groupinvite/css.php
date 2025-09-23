@@ -21,3 +21,14 @@
 #token-input-group-invite-input {
 	width: 100% !important;
 }
+
+.ossn-notification-icon-groupinvite {
+    display: inline-block;
+}
+.ossn-notification-icon-groupinvite:before {
+	content: "\f0c0";
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+}

@@ -26,6 +26,17 @@ function group_invite_init() {
 		ossn_add_hook('notification:view', 'groupinvite', 'groupinvite_notification');
 		ossn_add_hook('notification:add', 'groupinvite', 'groupinvite_notification_add_config');
 		ossn_add_hook('notification:participants', 'groupinvite', 'groupinvite_notification_participants');
+		ossn_add_hook('notification:redirect:uri', 'groupinvite', 'groupinvite_redirect_uri');		
+}
+/**
+ * Redirect URI for group invite
+ *
+ * @reutrn string
+ */
+function groupinvite_redirect_uri($hook, $type, $return, $params) {
+		$notification = $params['notification'];
+		$uri          = "group/{$notification->subject_guid}";
+		return $uri;
 }
 /** 
  * Group invitation notification

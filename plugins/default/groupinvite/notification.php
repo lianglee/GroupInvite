@@ -10,22 +10,18 @@
  */
 
 $notif = $params['notification'];
-$baseurl = ossn_site_url();
+
 $user = ossn_user_by_guid($notif->poster_guid);
 $group = ossn_get_group_by_guid($notif->subject_guid);
 
-$user->fullname = "<strong>{$user->fullname}</strong>";
-$img = "<div class='notification-image'><img src='{$baseurl}avatar/{$user->username}/small' /></div>";
-$type = "<i class='fa fa-users fa-groupinvite'></i>";
-if ($notif->viewed !== NULL) {
-        $viewed = '';
-} elseif ($notif->viewed == NULL) {
-        $viewed = 'class="ossn-notification-unviewed"';
-}
-$url = ossn_group_url($group->guid);
-$notification_read = "{$baseurl}notification/read/{$notif->guid}?notification=" . urlencode($url);
-echo "<a href='{$notification_read}'>
-	       <li {$viewed}> {$img} 
-		   <div class='notfi-meta'> {$type}
-		   <div class='data'>" . ossn_print("ossn:notifications:{$notif->type}", array($user->fullname, $group->title)) . '</div>
-</div></li></a>';
+$text = ossn_print("ossn:notifications:{$notif->type}", array($user->fullname, $group->title));
+echo ossn_plugin_view('notifications/template/view', array(
+				'iconURL'   => $user->iconURL()->small,
+				'customprint' => $text,
+				'guid'      => $notif->guid,
+				'type'      => $notif->type,
+				'viewed'    => $notif->viewed,
+				'icon_type' => 'groupinvite',
+				'instance'  => $notif,
+				'fullname'  => $user->fullname,
+));

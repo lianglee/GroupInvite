@@ -13,6 +13,6 @@ $en = array(
 	'groupinvite:widget:desc' => 'Select your friends seperated by a comma and click send.',
 	'groupinvite:invite' => 'Invite',
 	'groupinvite:sent' => 'Invitation has been sent, your friend will receive a notfication about your invitation',
-	'ossn:notifications:groupinvite' => '%s has invited you to join group <strong>%s</strong>',
+	'ossn:notifications:groupinvite' => '<strong>%s</strong> has invited you to join group <strong>%s</strong>',
 );
 ossn_register_languages('en', $en); 
