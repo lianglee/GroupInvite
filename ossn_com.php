@@ -21,12 +21,12 @@ function group_invite_init() {
 		}
 		ossn_add_hook('group', 'widgets', 'group_inivite_widget', 1);
 		ossn_extend_view('css/ossn.default', 'groupinvite/css');
-		
-		//notification	
+
+		//notification
 		ossn_add_hook('notification:view', 'groupinvite', 'groupinvite_notification');
 		ossn_add_hook('notification:add', 'groupinvite', 'groupinvite_notification_add_config');
 		ossn_add_hook('notification:participants', 'groupinvite', 'groupinvite_notification_participants');
-		ossn_add_hook('notification:redirect:uri', 'groupinvite', 'groupinvite_redirect_uri');		
+		ossn_add_hook('notification:redirect:uri', 'groupinvite', 'groupinvite_redirect_uri');
 }
 /**
  * Redirect URI for group invite
@@ -38,9 +38,9 @@ function groupinvite_redirect_uri($hook, $type, $return, $params) {
 		$uri          = "group/{$notification->subject_guid}";
 		return $uri;
 }
-/** 
+/**
  * Group invitation notification
- * 
+ *
  * @param $hook   string notification:view
  * @param $type   string groupinvite
  * @param $return string notification view element
@@ -49,13 +49,13 @@ function groupinvite_redirect_uri($hook, $type, $return, $params) {
  * @return string
  */
 function groupinvite_notification($hook, $type, $return, $params) {
-		return ossn_plugin_view("groupinvite/notification", array(
-				'notification' => $params
+		return ossn_plugin_view('groupinvite/notification', array(
+				'notification' => $params,
 		));
 }
-/** 
+/**
  * Group invitation notification configuration
- * 
+ *
  * @param $hook   string notification:add
  * @param $type   string groupinvite
  * @param $return array  config
@@ -64,12 +64,12 @@ function groupinvite_notification($hook, $type, $return, $params) {
  * @return array
  */
 function groupinvite_notification_add_config($hook, $type, $return, $params) {
-		$params["owner_guid"] = $params["notification_owner"];
+		$params['owner_guid'] = $params['notification_owner'];
 		return $params;
 }
-/** 
+/**
  * Group invitation notification widget
- * 
+ *
  * @param $hook   string group
  * @param $type   string widgets
  * @param $return array  config
@@ -78,17 +78,19 @@ function groupinvite_notification_add_config($hook, $type, $return, $params) {
  * @return array
  */
 function group_inivite_widget($hook, $type, $module, $params) {
-		if(isset($params['group']) && $params['group']->isMember(null, ossn_loggedin_user()->guid)) {
-				$module[] = ossn_plugin_view("groupinvite/widget", $params);
+		if(ossn_isLoggedin()) {
+				if(isset($params['group']) && $params['group']->isMember(null, ossn_loggedin_user()->guid)) {
+						$module[] = ossn_plugin_view('groupinvite/widget', $params);
+				}
 		}
 		return $module;
 }
 /**
- * Do not send notification to others users 
+ * Do not send notification to others users
  *
  * @return void
  */
-function groupinvite_notification_participants(){
-		return false;	
+function groupinvite_notification_participants() {
+		return false;
 }
 ossn_register_callback('ossn', 'init', 'group_invite_init');
