@@ -10,7 +10,7 @@
  */
 $en = array(
 	'groupinvite:widget:title' => 'Invite a friend',
-	'groupinvite:widget:desc' => 'Select your friends seperated by a comma and click send.',
+	'groupinvite:widget:desc' => 'Select your friends separated by a comma and click send.',
 	'groupinvite:invite' => 'Invite',
 	'groupinvite:sent' => 'Invitation has been sent, your friend will receive a notfication about your invitation',
 	'ossn:notifications:groupinvite' => '<strong>%s</strong> has invited you to join group <strong>%s</strong>',
